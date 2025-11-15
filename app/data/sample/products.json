@@ -1,0 +1,68 @@
+[
+  {
+    "id": "p001",
+    "title": "Self-Heating Smart Mug",
+    "price": 39.99,
+    "units_sold": 8500,
+    "GMV": 339000,
+    "trend_score": 91,
+    "margin": 0.45,
+    "image_url": "https://cdn.example.com/products/smart_mug.jpg",
+    "source": "Tabcut→Linkup"
+  },
+  {
+    "id": "p002",
+    "title": "Portable LED Neck Reading Light",
+    "price": 24.99,
+    "units_sold": 5400,
+    "GMV": 134000,
+    "trend_score": 84,
+    "margin": 0.38,
+    "image_url": "https://cdn.example.com/products/neck_light.jpg",
+    "source": "Tabcut→Linkup"
+  },
+  {
+    "id": "p003",
+    "title": "AI Pet Feeder with Camera",
+    "price": 79.00,
+    "units_sold": 1200,
+    "GMV": 94800,
+    "trend_score": 77,
+    "margin": 0.52,
+    "image_url": "https://cdn.example.com/products/ai_feeder.jpg",
+    "source": "Tabcut→Linkup"
+  },
+  {
+    "id": "p004",
+    "title": "Wireless Mini Label Printer",
+    "price": 33.00,
+    "units_sold": 4700,
+    "GMV": 155100,
+    "trend_score": 82,
+    "margin": 0.41,
+    "image_url": "https://cdn.example.com/products/mini_printer.jpg",
+    "source": "Tabcut→Linkup"
+  },
+  {
+    "id": "p005",
+    "title": "Heatless Curling Rod Headband",
+    "price": 18.99,
+    "units_sold": 9200,
+    "GMV": 174000,
+    "trend_score": 88,
+    "margin": 0.35,
+    "image_url": "https://cdn.example.com/products/curling_band.jpg",
+    "source": "Tabcut→Linkup"
+  },
+  {
+    "id": "p006",
+    "title": "MagSafe Charging Phone Stand",
+    "price": 29.99,
+    "units_sold": 6900,
+    "GMV": 207000,
+    "trend_score": 86,
+    "margin": 0.42,
+    "image_url": "https://cdn.example.com/products/magsafe_stand.jpg",
+    "source": "Tabcut→Linkup"
+  }
+]

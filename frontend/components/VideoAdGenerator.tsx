@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Textarea } from '@/components/ui/textarea';
 
 interface TaskStatus {
   status: 'processing' | 'completed' | 'failed';
@@ -18,8 +19,7 @@ interface VideoAdResult {
 }
 
 export default function VideoAdGenerator() {
-  const [basePrompt, setBasePrompt] = useState('');
-  const [adPrompt, setAdPrompt] = useState('');
+  const [prompt, setPrompt] = useState('');
   const [result, setResult] = useState<VideoAdResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -77,8 +77,8 @@ export default function VideoAdGenerator() {
   };
 
   const generateVideoAd = async (useAsync: boolean = true) => {
-    if (!basePrompt.trim() || !adPrompt.trim()) {
-      setError('Both prompts are required');
+    if (!prompt.trim()) {
+      setError('Video prompt is required');
       return;
     }
 
@@ -97,8 +97,8 @@ export default function VideoAdGenerator() {
           'X-Freepik-API-Key': API_KEY,
         },
         body: JSON.stringify({
-          base_prompt: basePrompt,
-          ad_prompt: adPrompt,
+          base_prompt: prompt,
+          ad_prompt: prompt,
         })
       });
 
@@ -144,10 +144,10 @@ export default function VideoAdGenerator() {
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-8">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-800 mb-2 text-center">
-          AI Video Ad Generator
+          EasyAd
         </h1>
         <p className="text-gray-600 text-center mb-8">
-          Create stunning video ads from text prompts
+          Automatically create marketing ads for trending products
         </p>
 
         <div className="bg-white rounded-lg shadow-lg p-8">
@@ -155,30 +155,19 @@ export default function VideoAdGenerator() {
           <div className="space-y-6 mb-8">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Base Image Prompt
+                Video Prompt
               </label>
-              <textarea
-                value={basePrompt}
-                onChange={(e) => setBasePrompt(e.target.value)}
-                placeholder="e.g., A sleek sports car in a futuristic city at sunset"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
-                rows={3}
+              <Textarea
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="e.g., A sleek sports car driving through a futuristic city at sunset with neon lights pulsing"
+                rows={4}
                 disabled={loading}
+                className="resize-none"
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Video Animation Prompt
-              </label>
-              <textarea
-                value={adPrompt}
-                onChange={(e) => setAdPrompt(e.target.value)}
-                placeholder="e.g., Camera zooms in dramatically while neon lights pulse"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                rows={3}
-                disabled={loading}
-              />
+              <p className="mt-2 text-xs text-gray-500">
+                Describe the ad you want to create. 
+              </p>
             </div>
           </div>
 
@@ -186,10 +175,10 @@ export default function VideoAdGenerator() {
           <div className="flex gap-4 mb-6">
             <button
               onClick={() => generateVideoAd(true)}
-              disabled={loading || !basePrompt.trim() || !adPrompt.trim()}
-              className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loading || !prompt.trim()}
+              className="flex-1 bg-gradient-to-r bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Generating...' : 'Generate Video Ad'}
+              {loading ? 'Generating...' : 'Generate Video'}
             </button>
           </div>
 
@@ -215,42 +204,19 @@ export default function VideoAdGenerator() {
             <div className="mt-8 space-y-6">
               <div className="border-t border-gray-200 pt-6">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                  Generated Content
+                  Generated Video
                 </h2>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Base Image */}
-                  <div className="border-l-4 border-purple-500 pl-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-lg font-semibold text-gray-800 flex items-center">
-                        <span className="text-2xl mr-2">🖼️</span>
-                        Base Image
-                      </h3>
-                      <button
-                        onClick={() => downloadFile(result.imageUrl!, 'base-image.png')}
-                        className="text-sm text-purple-600 hover:text-purple-700 font-medium"
-                      >
-                        Download
-                      </button>
-                    </div>
-                    {result.imageUrl && (
-                      <img
-                        src={result.imageUrl}
-                        alt="Generated base image"
-                        className="w-full rounded-lg shadow-md"
-                      />
-                    )}
-                  </div>
-
+                <div className="max-w-2xl mx-auto">
                   {/* Video */}
                   <div className="border-l-4 border-blue-500 pl-4">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-lg font-semibold text-gray-800 flex items-center">
                         <span className="text-2xl mr-2">🎬</span>
-                        Video Ad
+                        Your Video
                       </h3>
                       <button
-                        onClick={() => downloadFile(result.videoUrl!, 'video-ad.mp4')}
+                        onClick={() => downloadFile(result.videoUrl!, 'generated-video.mp4')}
                         className="text-sm text-blue-600 hover:text-blue-700 font-medium"
                       >
                         Download
@@ -274,8 +240,7 @@ export default function VideoAdGenerator() {
                 <button
                   onClick={() => {
                     setResult(null);
-                    setBasePrompt('');
-                    setAdPrompt('');
+                    setPrompt('');
                   }}
                   className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                 >
@@ -283,7 +248,7 @@ export default function VideoAdGenerator() {
                 </button>
                 <button
                   onClick={() => generateVideoAd(true)}
-                  className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all"
+                  className="px-6 py-2 bg-gradient-to-r blue-300 text-white rounded-lg hover:blue-700 transition-all"
                 >
                   Generate Another
                 </button>
@@ -299,14 +264,13 @@ export default function VideoAdGenerator() {
               </h3>
               <div className="space-y-3 text-sm text-gray-600">
                 <div>
-                  <strong>Base:</strong> "A premium coffee cup on a minimalist desk with morning sunlight"
-                  <br />
-                  <strong>Video:</strong> "Steam rising gently from the cup, camera slowly zooming in"
+                  "A premium coffee cup on a minimalist desk with morning sunlight streaming through the window, steam rising gently from the cup as the camera slowly zooms in"
                 </div>
                 <div>
-                  <strong>Base:</strong> "A smartphone displaying a vibrant app interface"
-                  <br />
-                  <strong>Video:</strong> "Screen lighting up with smooth animations and notifications"
+                  "A smartphone displaying a vibrant app interface, screen lighting up with smooth animations and notifications appearing one by one"
+                </div>
+                <div>
+                  "A sleek sports car driving through a futuristic city at sunset, neon lights reflecting off its surface as it speeds past tall buildings"
                 </div>
               </div>
             </div>

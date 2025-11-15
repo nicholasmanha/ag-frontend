@@ -1,9 +1,5 @@
-import PromptGenerator from '@/components/freepik';
+import VideoAdGenerator from '@/components/VideoAdGenerator';
 
-export default function Home() {
-  return (
-    <main>
-      <PromptGenerator />
-    </main>
-  );
+export default function Page() {
+  return <VideoAdGenerator />;
 }

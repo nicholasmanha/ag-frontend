@@ -44,3 +44,49 @@ next-env.d.ts
 # python
 **/venv/
 **/__pycache__
+
+# Dependencies
+/frontend/node_modules
+/frontend/.pnp
+/frontend/.pnp.js
+
+# Testing
+/frontend/coverage
+
+# Next.js
+/frontend/.next/
+/frontend/out/
+
+# Production
+/frontend/build
+
+# Misc
+/frontend/.DS_Store
+/frontend/*.pem
+
+# Debug
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+
+# Local env files
+/frontend/.env*.local
+/frontend/.env
+
+# Vercel
+/frontend/.vercel
+
+# TypeScript
+/frontend/*.tsbuildinfo
+/frontend/next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

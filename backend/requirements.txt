@@ -1,3 +1,27 @@
+# Flask
 Flask==3.0.0
 flask-cors==4.0.0
+
+# Database
+psycopg2-binary>=2.9.9
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Type hints
+typing-extensions>=4.0.0
+
+# HTTP requests
 requests==2.31.0
+
+# LangChain & LangGraph
+langgraph>=1.0.0
+langchain>=1.0.0
+langchain-community>=0.4.0
+langchain-google-vertexai>=3.0.0
+langchain-linkup
+langchain-openai
+
+# Fastino Personalization Client
+# Install with: pip install --extra-index-url https://fastino-ai.github.io/Pioneer/simple/ personalization-client
+personalization-client
